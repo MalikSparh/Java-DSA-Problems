@@ -1,0 +1,51 @@
+## Trapping RainWater
+
+public class Question {
+    public static int Trapping_Rainwater(int Height[]){
+        int n = Height.length;
+
+        //LeftMax Boundary
+        int LeftMax[] = new int[n];
+        LeftMax[0] = Height[0];
+        for(int i=1 ; i<n ; i++){
+            LeftMax[i] = Math.max(Height[i],LeftMax[i-1]);
+        }
+
+        //RightMax Boundary
+        int RightMax[] = new int[n];
+        RightMax[n-1] = Height[n-1];
+        for(int i=n-2 ; i>=0 ; i--){
+            RightMax[i] = Math.max(Height[i],RightMax[i+1]);
+        }
+
+        int Trapped_Water = 0;
+        for(int i=0 ; i<n ; i++){
+            //WaterLevel
+            int WaterLevel = Math.min(LeftMax[i],RightMax[i]);
+
+            //TrappedWater
+            Trapped_Water = Trapped_Water + (WaterLevel - Height[i]);
+        }
+        return Trapped_Water;
+    }
+}
+
+## Buy & Sell Stocks
+
+public Class Question2{
+    public static int Buy_Sell_Stocks(int Price[]){
+        int Buying_Price = Integer.MAX_VALUE;
+        int Max_Profit = 0;
+
+        for(int i=0 ; i<Price.length ; i++){
+            if (Buying_Price<Price[i]){
+                int Profit = Price[i]-Buying_Price;
+                Max_Profit = Math.max(Max_Profit , Profit);
+            }
+            else{
+                Buying_Price = Price[i];
+            }
+        }
+        return Max_Profit;
+    }
+}
